@@ -17,6 +17,7 @@ namespace BotScaffold
     /// A Dialog that takes the User's message and maps it to a below intent. 
     /// Our bot currently only understands how to send a
     /// </summary>
+    //[LuisModel("YOUR_LUIS_APP_ID", "YOUR_LUIS_APP_KEY")]
     [LuisModel("YOUR_LUIS_APP_ID", "YOUR_LUIS_APP_KEY")]
     [Serializable]
     public class SendMessageDialog : LuisDialog<object>
@@ -35,6 +36,8 @@ namespace BotScaffold
 
             result.TryFindEntity("builtin.communication.contact_name", out contactName);
             result.TryFindEntity("builtin.communication.message", out message);
+
+            // Write some logic here to send the text message
 
             var reply = String.Format("Okay I'll send the message \"{0}\" to {1}", message.Entity, contactName.Entity);
             await context.PostAsync(reply);
