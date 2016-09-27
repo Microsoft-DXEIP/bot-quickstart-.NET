@@ -41,6 +41,7 @@ namespace BotScaffold
 
             var reply = String.Format("Okay I'll send the message \"{0}\" to {1}", message.Entity, contactName.Entity);
             await context.PostAsync(reply);
+            context.Wait(MessageReceived);
         }
     }
 }
