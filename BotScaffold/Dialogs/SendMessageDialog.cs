@@ -38,10 +38,16 @@ namespace BotScaffold
             result.TryFindEntity("builtin.communication.message", out message);
 
             // Write some logic here to send the text message
-
-            var reply = String.Format("Okay I'll send the message \"{0}\" to {1}", message.Entity, contactName.Entity);
-            await context.PostAsync(reply);
-            context.Wait(MessageReceived);
+            if (contactName == null || message == null)
+            {
+                await None(context, result);
+            }
+            else
+            {
+                var reply = String.Format("Okay I'll send the message \"{0}\" to {1}", message.Entity, contactName.Entity);
+                await context.PostAsync(reply);
+                context.Wait(MessageReceived);
+            }
         }
     }
 }
