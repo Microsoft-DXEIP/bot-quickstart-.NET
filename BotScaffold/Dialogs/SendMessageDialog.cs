@@ -17,7 +17,6 @@ namespace BotScaffold
     /// A Dialog that takes the User's message and maps it to a below intent. 
     /// Our bot currently only understands how to send a
     /// </summary>
-    //[LuisModel("YOUR_LUIS_APP_ID", "YOUR_LUIS_APP_KEY")]
     [LuisModel("YOUR_LUIS_APP_ID", "YOUR_LUIS_APP_KEY")]
     [Serializable]
     public class SendMessageDialog : LuisDialog<object>
@@ -26,6 +25,7 @@ namespace BotScaffold
         public async Task None(IDialogContext context, LuisResult result)
         {
             await context.PostAsync("Sorry I didn't understand. I am a very simple bot. Try asking me to send a Text Message");
+            context.Wait(MessageReceived);
         }
 
         [LuisIntent("builtin.intent.communication.send_text")]
